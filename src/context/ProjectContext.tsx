@@ -280,10 +280,13 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
           projectId,
           'content',
           {
+            maxAttempts: 30, // Adjust According to the no. of chapters
+            interval: 15000, // Every Chapter needs 15 seconds to generate content
             onProgress: (progress) => {
-              updateLoadingProgress(30 + progress * 0.7); // Scale progress from 30% to 100%
+              updateLoadingProgress(15 + progress * 0.85); // Scale progress from 15% to 100%
             }
-          }
+          },
+          
         );
 
 
