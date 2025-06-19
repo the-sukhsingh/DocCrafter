@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DocCrafter
+
+A modern documentation generation platform that uses AI to transform project information into professional documents.
+
+![DocCrafter](https://your-project-image-url.com)
+
+## Overview
+
+DocCrafter is a Next.js-powered web application that streamlines the process of creating comprehensive project documentation. By answering guided questions about your project, the platform generates professional documentation with well-structured chapters that you can export to multiple formats.
+
+### Key Features
+
+- **AI-Powered Document Generation**: Transform project information into professional documentation
+- **Interactive Questionnaire**: Guide users through structured information gathering
+- **Chapter-Based Organization**: Automatically organize content into logical chapters
+- **Multiple Export Options**: Export to DOCX and other formats
+- **Project Dashboard**: Manage all your documentation projects in one place
+- **Real-time Preview**: View your documentation as you build it
+
+## Technology Stack
+
+- **Frontend**: Next.js 15, React 19, Tailwind CSS 4, DaisyUI
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB with Mongoose
+- **Authentication**: Clerk
+- **Background Processing**: Inngest
+- **Storage**: Azure Storage Blob
+- **Document Generation**: DOCX
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- MongoDB connection
+- Clerk account for authentication
+- Azure Storage account (for storing images and assets)
+- Inngest account (for background processing)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/doccrafter.git
+   cd doccrafter
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables by creating a `.env.local` file:
+   ```
+   # Next.js
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+   # MongoDB
+   MONGODB_URI=your_mongodb_connection_string
+
+   # Clerk Authentication
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+
+   # Azure Storage
+   AZURE_STORAGE_CONNECTION_STRING=your_azure_storage_connection_string
+   AZURE_STORAGE_CONTAINER_NAME=your_container_name
+
+   # Inngest
+   INNGEST_EVENT_KEY=your_inngest_event_key
+   INNGEST_SIGNING_KEY=your_inngest_signing_key
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+### Building for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/                   # Next.js 15 App Router
+    (app)/               # Protected routes (dashboard, projects)
+    (test)/              # Test routes
+    api/                 # API routes
+  components/            # React components
+    screens/             # Major screen components
+    sections/            # Website sections
+  context/               # React context providers
+  hooks/                 # Custom React hooks
+  inngest/               # Background job definitions
+  lib/                   # Shared libraries
+  model/                 # Data models
+  services/              # Service layer
+  utils/                 # Utility functions
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage Flow
 
-## Learn More
+1. **Sign Up/Login**: Create an account or log in
+2. **Create Project**: Start a new documentation project
+3. **Answer Questions**: Provide information about your project
+4. **Review Chapters**: Review and edit generated chapter structure
+5. **Generate Content**: AI generates detailed content for each chapter
+6. **Preview & Export**: Review the final document and export to your preferred format
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running Tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run test
+```
 
-## Deploy on Vercel
+### Linting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the [MIT License](LICENSE)
+
+## Acknowledgements
+
+- Next.js
+- React
+- Tailwind CSS
+- DaisyUI
+- Mongoose
+- Clerk
+- Inngest
+- Azure Storage
+- DOCX
