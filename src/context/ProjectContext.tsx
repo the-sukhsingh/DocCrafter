@@ -98,16 +98,14 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
   // Set project details
   const setProject = (project: IProject) => {
-    console.log("Setting project:", project);
     setProjectId(project._id.toString());
     setProjectName(project.title);
     setProjectDescription(project.description);
     setProjectCategory(project.content ? project.content.domain || project.domain : project.domain);
     setQuestions(project.answers || []);
-    setChapters(project.content ? project.content.chapters || project.chapters || [] : []);
+    setChapters(project.content ? project.content.chapters : project.chapters);
 
     const imagePrompts = project.content ? project.content.chapters.map(chapter => chapter.images || []).flat() : [];
-    console.log("Setting images from project content:", imagePrompts);
     setImages(imagePrompts);
 
 
@@ -169,7 +167,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
         setLoadingState(prev =>
           prev ? { ...prev, message: "Preparing questions for your project..." } : null
         );
-        console.log("Project created successfully:", result.project);
         const pollResult = await Promise.resolve(await ProjectService.pollProjectStatus(
           result.project._id.toString(),
           'questions',
@@ -179,7 +176,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
             }
           }
         ));
-        console.log("Poll result:", pollResult);
         if (pollResult.success && pollResult.data) {
           if (pollResult.data.length > 0) {
             setQuestions(pollResult.data.map((q: string) => ({ question: q, answer: '' })));
@@ -290,7 +286,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
           }
         );
 
-        console.log("Poll result:", pollResult);
 
         if (pollResult.error) {
           setError(pollResult.error);
@@ -305,7 +300,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
         if (pollResult.success && pollResult.data && pollResult.data.project) {
 
           const project = pollResult.data.project;
-          console.log("Project content generated successfully:", project);
           setProject(project);
           setNextStep('content');
         }

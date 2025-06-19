@@ -132,7 +132,6 @@ const Build = () => {
   useEffect(() => {
     let contentData: string = "";
     chapters.forEach((element: any) => {
-      console.log("Chapter Element:", element);
       contentData += `## ${element.title}\n`;
       contentData += element.content + "\n\n";
     });

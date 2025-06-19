@@ -11,8 +11,6 @@ async function fetchProjectContent(url: string) {
             throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(data)
-        console.log('Fetched project content:', data.length, 'items');
         return data;
     } catch (error) {
         console.error('Error fetching project content:', error);
@@ -91,7 +89,6 @@ export async function GET(request: Request) {
             }
         }
 
-        // console.log('Project status:', status);
 
 
         return NextResponse.json({

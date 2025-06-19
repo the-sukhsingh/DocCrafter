@@ -365,7 +365,6 @@ export class ProjectService {
           }
 
           const result = await response.json();
-          console.log('Project status check result:', result);
           if (result.success && result.status) {
             const status = result.status;
             let nextStep = null;
@@ -403,8 +402,6 @@ export class ProjectService {
                 }
                 break;
             }
-            console.log('Project status:', status);
-            console.log('Next step:', nextStep, 'with data:', stepData);
             if (nextStep) {
               clearInterval(timer);
               if (options.onProgress) options.onProgress(100);

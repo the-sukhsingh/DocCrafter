@@ -24,7 +24,6 @@ const PROJECTPAGE = () => {
     useEffect(() => {
         if (parsedProject) {
             let images: string[] = [];
-            console.log('Parsed Project:', parsedProject);
             if (parsedProject.content?.chapters) {
                 parsedProject.content.chapters.forEach((chapter: any) => {
                     // Fix: Use push instead of concat to actually add items to the array
@@ -138,7 +137,6 @@ const PROJECTPAGE = () => {
             // Set project data in context before navigation
             setProject(parsedProject);
             setCurrentStep(parsedProject.currentStep);
-            console.log('Project set in context:', parsedProject);
             // Navigate to build page
             router.push('/build');
         }

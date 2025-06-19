@@ -25,7 +25,6 @@ export const GenerateContent = inngest.createFunction(
                 return project as IProject;
             });            // Use existing chapters
             const chaptersToGenerate = projectData.chapters;
-            console.log(`📚 Found ${chaptersToGenerate.length} chapters to generate content for`);
             if (chaptersToGenerate.length === 0) {
                 throw new Error("No chapters to generate content for");
             }
@@ -49,13 +48,9 @@ export const GenerateContent = inngest.createFunction(
                 }
             }
 
-            // Generate content for all chapters sequentially (not using step.run)
-            console.log(`🔄 Starting content generation for ${chaptersWithContent.length} chapters`);
-            
             for (let i = 0; i < chaptersWithContent.length; i++) {
                 const chapter = chaptersWithContent[i];
-                console.log(`🚀 Generating content for chapter ${chapter.chapterNo} (${i + 1}/${chaptersWithContent.length})`);
-                
+
                 const content = await generateContent({
                     projectInfo: {
                         title: chapter.title,
@@ -93,12 +88,8 @@ export const GenerateContent = inngest.createFunction(
                     images: imagePrompts
                 };
 
-                console.log(
-                    `✅ Chapter ${chapter.chapterNo} completed - Length: ${cleanedContent.length}, Images: ${imagePrompts.length}`
-                );
-            }
 
-            console.log(`✅ All ${chaptersWithContent.length} chapters content generation completed`);
+            }
 
             // Upload the JSON file to Azure Blob Storage
             await step.run("upload-project-json", async () => {

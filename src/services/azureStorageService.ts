@@ -33,7 +33,6 @@ export async function uploadFile(params: {
   try {
     // Create container if it doesn't exist
     await createContainerIfNotExists();
-    console.log("FiletName,fileBuffer,contentType",fileName,fileBuffer,contentType);
     // Generate a unique blob name to prevent overwrites
     const extension = fileName.split('.').pop();
     const blobName = `${uuidv4()}.${extension}`;
@@ -82,7 +81,6 @@ async function createContainerIfNotExists() {
     });
     
     if (createContainerResponse.succeeded) {
-      console.log(`Container "${containerName}" created successfully`);
     }
   } catch (error) {
     console.error(`Error creating container "${containerName}":`, error);

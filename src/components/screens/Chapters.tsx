@@ -90,7 +90,6 @@ const Chapters: React.FC<ChaptersProps> = ({ chapters, onChaptersChange }) => {
   const moveChapter = (fromIndex: number, direction: 'up' | 'down') => {
     const toIndex = direction === 'up' ? fromIndex - 1 : fromIndex + 1;
     if (toIndex >= 0 && toIndex < chapters.length) {
-      console.log("Clicked")
       const updatedChapters = [...chapters];
       [updatedChapters[fromIndex], updatedChapters[toIndex]] = 
       [updatedChapters[toIndex], updatedChapters[fromIndex]];

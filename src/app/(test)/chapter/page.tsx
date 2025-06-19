@@ -66,7 +66,6 @@ const ChapterTest = () => {
 
     const handleChaptersChange = (updatedChapters: any[]) => {
         setChapters(updatedChapters);
-        console.log("Updated Chapters:", updatedChapters);
     };
 
   return (

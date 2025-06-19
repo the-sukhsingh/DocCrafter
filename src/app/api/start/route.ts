@@ -35,7 +35,6 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     );
   }
-  console.log("User ID:", user);
 
   const dbUser = await User.findOne({ 
     $or: [

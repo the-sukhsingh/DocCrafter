@@ -12,9 +12,6 @@ export async function POST(request: Request) {
 
     const { projectId, chapters } = await request.json();
 
-    console.log("Received request to generate content for project:", projectId);
-    console.log("Chapters to generate:", chapters);
-
     // Validate the input data
     if (!projectId || !chapters) {
         return NextResponse.json(

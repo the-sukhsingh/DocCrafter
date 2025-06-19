@@ -289,7 +289,6 @@ export class DocxExporter {
       includeTableOfContents = true,
       includeCoverPage = true
     } = options;
-    console.log("Options", options)
     const documentChildren: Paragraph[] = [];
 
     // Add cover page
