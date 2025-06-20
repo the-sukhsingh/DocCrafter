@@ -2,7 +2,7 @@
 
 A modern documentation generation platform that uses AI to transform project information into professional documents.
 
-![DocCrafter](https://your-project-image-url.com)
+![DocCrafter](./public/DocCrafter.png)
 
 ## Overview
 
