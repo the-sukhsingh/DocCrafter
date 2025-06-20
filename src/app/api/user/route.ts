@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       const newUser = await User.create({
         username: email.split('@')[0],
         email: email,
-        remainingProjects: 3, // Give new users 3 free projects
+        remainingProjects: 0, // Give new users 0 free projects
       });
       
       return NextResponse.json({
