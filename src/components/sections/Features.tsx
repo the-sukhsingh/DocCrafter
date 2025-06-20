@@ -2,7 +2,7 @@ import React from 'react'
 
 const Features = () => {
   return (
-      <section className="py-8 w-full bg-gradient-to-b from-base-100 to-base-200 relative">
+      <section id='features' className="py-8 w-full bg-gradient-to-b from-base-100 to-base-200 relative">
           {/* Background decorative elements */}
           <div className="absolute inset-0 overflow-hidden">
               {/* Decorative grid pattern */}

@@ -8,7 +8,7 @@ const Navbar = () => {
   const { user } = useAuthContext(); 
   return (
   <nav className="flex justify-between items-center p-4 bg-base-100">
-    <div className="text-2xl font-bold"><Link href="/">ProjectForge</Link>
+    <div className="text-2xl font-bold"><Link href="/">DocCrafter</Link>
     </div>
 
     <div className="flex items-center gap-6">

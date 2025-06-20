@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { ProjectService } from '../services/ProjectFunctions';
 import { IProject } from '@/model/project';
+import { useRouter } from 'next/navigation';
 
 // Define types based on ProjectFunctions.ts
 type ProjectData = {
@@ -95,6 +96,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<StepType>('start');
 
+  const router = useRouter();
 
   // Set project details
   const setProject = (project: IProject) => {
@@ -292,22 +294,26 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
         if (pollResult.error) {
           setError(pollResult.error);
+          clearProject();
+          router.push('/dashboard'); // Redirect to Dashboard if content generation fails
+          return { success: false, error: pollResult.error };
         }
 
         if (!pollResult.data && !pollResult.data.project) {
           setError("No project data returned from content generation.");
-          stopLoading();
+          router.push('/dashboard'); // Redirect to Dashboard if no project data
           return { success: false, error: "No project data returned from content generation." };
         }
 
         if (pollResult.success && pollResult.data && pollResult.data.project) {
-
           const project = pollResult.data.project;
           setProject(project);
           setNextStep('content');
         }
       } else if (result.error) {
         setError(result.error);
+        clearProject();
+        router.push('/dashboard'); // Redirect to Dashboard if content generation fails
       }
 
       stopLoading();

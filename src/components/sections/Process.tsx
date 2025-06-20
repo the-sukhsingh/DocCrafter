@@ -3,7 +3,7 @@ import React from 'react'
 
 const Process = () => {
   return (
-      <section className="py-24 bg-base-100 relative overflow-hidden">
+      <section id='howitworks' className="py-24 bg-base-100 relative overflow-hidden">
           {/* Background decorative elements */}
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-base-200 to-transparent"></div>
           <div className="absolute right-0 top-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 blur-3xl"></div>

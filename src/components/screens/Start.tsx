@@ -6,51 +6,23 @@ type FormData = {
   projectName: string;
   projectDescription: string;
   projectCategory: string;
+  otherCategory?: string;
 }
 
 type StartPageProps = {
   onProjectSubmit: (data: FormData) => void;
 }
 
-// Test data
-const testProjectData = {
-  title: "E-commerce Mobile App",
-  domain: "Mobile Development",
-  description: "A comprehensive mobile application for online shopping with user authentication, product catalog, shopping cart, and payment integration."
-};
 
-const testAnswers = [
-  {
-    question: "What is your target audience for this project?",
-    answer: "Young adults aged 18-35 who prefer mobile shopping and value convenience and fast checkout processes."
-  },
-  {
-    question: "What key features are most important to you?",
-    answer: "User authentication, product search and filtering, secure payment gateway, order tracking, and push notifications."
-  },
-  {
-    question: "Do you have any specific technical requirements or constraints?",
-    answer: "Must work on both iOS and Android, integrate with existing payment providers like Stripe, and support offline browsing."
-  },
-  {
-    question: "What is your expected timeline for this project?",
-    answer: "6 months for MVP development, with additional 3 months for testing and refinement."
-  },
-  {
-    question: "How do you plan to measure the success of this project?",
-    answer: "User acquisition rate, conversion rates, average order value, and customer satisfaction scores."
-  }
-];
 
 const StartPage = ({ onProjectSubmit }: StartPageProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch
   } = useForm<FormData>()
 
-
-  
 
   const validateForm = (data: FormData) => {
     const errors: Record<string, string> = {}
@@ -61,7 +33,10 @@ const StartPage = ({ onProjectSubmit }: StartPageProps) => {
       errors.projectDescription = "Project description must be between 10 and 500 characters."
     }
     if (data.projectCategory === "Pick a category") {
-      errors.projectCategory = "Please select a project category."    }
+      errors.projectCategory = "Please select a project category."}
+    if (data.projectCategory === "Other" && !data.otherCategory) {
+      errors.otherCategory = "Please specify your category."
+    }
     return Object.keys(errors).length ? errors : null
   }  
   
@@ -71,6 +46,8 @@ const StartPage = ({ onProjectSubmit }: StartPageProps) => {
       console.log(errors)
       return
     }
+
+    data.projectCategory = data.projectCategory === "Other" ? data.otherCategory || "Uncategorized" : data.projectCategory;
 
     // Call the parent component's submit handler
     onProjectSubmit(data);
@@ -179,7 +156,28 @@ const StartPage = ({ onProjectSubmit }: StartPageProps) => {
                   </svg>
                 </div>
               </div>
-            </div>            {/* Submit Button */}
+            </div>  
+
+            {/* Other Category */}
+            {watch("projectCategory") === "Other" && (
+              <div className='space-y-3'>
+              <label htmlFor="othercategory" className='block text-sm font-semibold text-gray-300 tracking-wide uppercase'>
+                Other Category
+              </label>
+              <div className='relative'>
+                <input 
+                type="text" 
+                className="w-full px-4 py-4 bg-gray-700/50 border-2 border-gray-600 rounded-xl focus:border-blue-500 focus:bg-gray-700 transition-all duration-300 outline-none text-gray-100"
+                id='othercategory'
+                {...register("otherCategory")}
+                placeholder="Please specify your category"
+                />
+              </div>
+              </div>
+            )}
+
+
+            {/* Submit Button */}
             <div className='pt-4'>
               <button 
                 disabled={Object.keys(errors).length > 0}
